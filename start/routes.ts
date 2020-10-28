@@ -20,8 +20,8 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.on('/').render('welcome')
+Route.on('/test').render('welcome')
 
-Route.get('/test/:name?', ({ params }) => {
-    return `hello From ${params.name} Route`
-})
+Route.get('/', 'ProductsController.index').as('products.index')
+Route.get('/products/:id', 'ProductsController.show').as('products.show')
+Route.post('/products', 'ProductsController.store').as('products.store')

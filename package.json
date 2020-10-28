@@ -18,10 +18,13 @@
   "dependencies": {
     "@adonisjs/auth": "^5.0.2",
     "@adonisjs/core": "^5.0.4-preview-rc-2",
+    "@adonisjs/drive": "^1.0.4",
     "@adonisjs/lucid": "^9.0.3",
     "@adonisjs/repl": "^1.1.5",
     "@adonisjs/session": "^4.0.5",
+    "@adonisjs/shield": "^4.0.2",
     "@adonisjs/view": "^3.0.7",
+    "cloudinary": "^1.23.0",
     "luxon": "^1.25.0",
     "mysql": "^2.18.1",
     "proxy-addr": "^2.0.6",

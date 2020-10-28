@@ -1,5 +1,36 @@
 @layout('layouts/app')
 
 @section('content')
-    <h1>Products Index Page</h1>
+    <div class="columns">
+        <div class="columns is-three-fifths is-offest-one-fifth">
+            <div class="box">
+                <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+                    {{ csrfField() }}
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <input type="file" name="image" class="input {{ flashMessages.has('errors.image') ? 'is-danger' : '' }}">
+                        </div>
+                        @if(flashMessages.has('errors.image'))
+                            <p class="help is-danger">
+                                {{ flashMessages.get('errors.image') }}
+                            </p>
+                        @endif
+                    </div>
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <input type="text" name="name" class="input {{ flashMessages.has('errors.name') ? 'is-danger' : '' }}">
+                        </div>
+                        <div class="control">
+                            <button type="submit" class="button is-link">Submit</button>
+                        </div>
+                    </div>
+                    @if( flashMessages.has('errors.name') )
+                        <p class="help is-danger">
+                            {{ flashMessages.get('errors.name') }}
+                        </p>
+                    @endif
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection

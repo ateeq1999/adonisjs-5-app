@@ -23,7 +23,8 @@
     "@adonisjs/session",
     "@adonisjs/view",
     "@adonisjs/lucid",
-    "@adonisjs/auth"
+    "@adonisjs/auth",
+    "@adonisjs/shield"
   ],
   "metaFiles": [
     {
@@ -31,10 +32,17 @@
       "reloadServer": false
     },
     {
+      "pattern": "tmp/uploads/**",
+      "reloadServer": false
+    },
+    {
       "pattern": "resources/views/**/*.edge",
       "reloadServer": false
     }
   ],
+  "directories": {
+    "public": "./tmp/uploads"
+  },
   "aceProviders": [
     "@adonisjs/repl"
   ]
