@@ -1,11 +1,10 @@
-import Cloudinary from 'App/Services/Cloudinary'
+// import Cloudinary from 'App/Services/Cloudinary'
+const fs = require('fs');
 
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Product from 'App/Models/Product'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import Application from '@ioc:Adonis/Core/Application'
-
-console.log(Cloudinary)
 
 export default class ProductsController {
     
@@ -18,13 +17,11 @@ export default class ProductsController {
 
     public async show({ view, params }: HttpContextContract) {
 
-        const product = await Product.find(params.id)
+        const product = await Product.findOrFail(params.id)
 
-        const url = Application.tmpPath('uploads/');
+        product?.image_url = 'http://192.168.8.101:8080/' + product?.cover_image
 
-        product?.image_url = url + product?.cover_image
-
-        return view.render('products/show', { product, url })
+        return view.render('products/show', { product })
     }
 
     public async store({ request, response }: HttpContextContract) {
@@ -51,18 +48,37 @@ export default class ProductsController {
 
         const imageName = `${new Date().getTime()}.${data.image.extname}`
 
+        // let cloudinary_response = await Cloudinary.upload(`${Application.tmpPath('uploads')}/${imageName}`, 'products')
+
+        await Product.create({
+            name: data.name,
+            cover_image: imageName,
+        })
+
         await data.image.move(Application.tmpPath('uploads'), {
             name: `${imageName}`,
         })
 
-        let cloudinary_response = await Cloudinary.upload(`${Application.tmpPath('uploads')}/${imageName}`, 'products')
-
-        await Product.create({
-            name: data.name,
-            cover_image: cloudinary_response.url,
-        })
-
         return response.redirect('back')
+    }
+
+    public async destory({ params, response, session }: HttpContextContract) {
+
+        const product = await Product.findOrFail(params.id)
+
+        const image = Application.tmpPath('uploads/') + product?.cover_image
+
+        if(fs.existsSync(image)){
+            // delete a file
+            fs.unlinkSync(image);
+        }
+
+        await product.delete()
+
+        session.flash('success', 'Product Deleted Successfuly')
+
+        return response.redirect('products.index')
+
     }
     
 }

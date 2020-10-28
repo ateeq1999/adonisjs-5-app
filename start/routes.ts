@@ -24,4 +24,6 @@ Route.on('/test').render('welcome')
 
 Route.get('/', 'ProductsController.index').as('products.index')
 Route.get('/products/:id', 'ProductsController.show').as('products.show')
+Route.delete('/products/:id', 'ProductsController.destory').as('products.delete1')
+// Route.post('/products/:id', 'ProductsController.destory').as('products.delete')
 Route.post('/products', 'ProductsController.store').as('products.store')

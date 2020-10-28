@@ -2,37 +2,58 @@
 
 @section('content')
     <div class="container">
-        <div class="columns">
-            <div class="columns is-six-fifths is-offest-one-fifth">
+        @if(flashMessages.has('success'))
+            <div class="box">
+                <p class="help is-danger">
+                    {{ flashMessages.get('success') }}
+                </p>
+            </div>
+        @endif
+        <div class="box">
+            <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+                {{ csrfField() }}
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        <input type="file" name="image" class="input {{ flashMessages.has('errors.image') ? 'is-danger' : '' }}">
+                    </div>
+                    @if(flashMessages.has('errors.image'))
+                        <p class="help is-danger">
+                            {{ flashMessages.get('errors.image') }}
+                        </p>
+                    @endif
+                </div>
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        <input type="text" name="name" class="input {{ flashMessages.has('errors.name') ? 'is-danger' : '' }}">
+                    </div>
+                    <div class="control">
+                        <button type="submit" class="button is-link">Submit</button>
+                    </div>
+                </div>
+                @if( flashMessages.has('errors.name') )
+                    <p class="help is-danger">
+                        {{ flashMessages.get('errors.name') }}
+                    </p>
+                @endif
+            </form>
+        </div>
+        <div class="container">
+            @each(product in products)
                 <div class="box">
-                    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+                    <div class="box">
+                        <h1>{{ product.name }}</h1>
+                    </div>
+                    <div class="box">
+                        <img src="{{ `http://192.168.8.101:8080/${product.cover_image}` }}" alt="Image">
+                    </div>
+                    <form action="{{ `/products/${product.id}?_method=DELETE` }}" method="POST" enctype="multipart/form-data" class="box">
                         {{ csrfField() }}
-                        <div class="field has-addons">
-                            <div class="control is-expanded">
-                                <input type="file" name="image" class="input {{ flashMessages.has('errors.image') ? 'is-danger' : '' }}">
-                            </div>
-                            @if(flashMessages.has('errors.image'))
-                                <p class="help is-danger">
-                                    {{ flashMessages.get('errors.image') }}
-                                </p>
-                            @endif
-                        </div>
-                        <div class="field has-addons">
-                            <div class="control is-expanded">
-                                <input type="text" name="name" class="input {{ flashMessages.has('errors.name') ? 'is-danger' : '' }}">
-                            </div>
-                            <div class="control">
-                                <button type="submit" class="button is-link">Submit</button>
-                            </div>
-                        </div>
-                        @if( flashMessages.has('errors.name') )
-                            <p class="help is-danger">
-                                {{ flashMessages.get('errors.name') }}
-                            </p>
-                        @endif
+                        <button type="submit" class="button is-danger">
+                            Delete
+                        </button>
                     </form>
                 </div>
-            </div>
+            @endeach
         </div>
     </div>
 @endsection
