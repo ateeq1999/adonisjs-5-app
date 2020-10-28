@@ -36,7 +36,7 @@ const staticConfig: AssetsConfig = {
   | - allow: Serve the file contents
   |
   */
-  dotFiles: 'ignore',
+  dotFiles: 'allow',
 
   /*
   |--------------------------------------------------------------------------

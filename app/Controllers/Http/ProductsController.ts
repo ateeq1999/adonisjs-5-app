@@ -20,7 +20,11 @@ export default class ProductsController {
 
         const product = await Product.find(params.id)
 
-        return view.render('products/show', { product })
+        const url = Application.tmpPath('uploads/');
+
+        product?.image_url = url + product?.cover_image
+
+        return view.render('products/show', { product, url })
     }
 
     public async store({ request, response }: HttpContextContract) {
@@ -60,4 +64,5 @@ export default class ProductsController {
 
         return response.redirect('back')
     }
+    
 }
