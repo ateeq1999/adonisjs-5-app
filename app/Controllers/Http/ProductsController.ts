@@ -5,6 +5,8 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Product from 'App/Models/Product'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import Application from '@ioc:Adonis/Core/Application'
+import ProductValidator from 'App/Validators/ProductValidator'
+import Redis from '@ioc:Adonis/Addons/Redis'
 
 export default class ProductsController {
     
@@ -19,32 +21,17 @@ export default class ProductsController {
 
         const product = await Product.findOrFail(params.id)
 
-        product?.image_url = 'http://192.168.8.101:8080/' + product?.cover_image
+        await Redis.set('foo', 'bar')
+        const foo = await Redis.get('foo')
 
-        return view.render('products/show', { product })
+        product?.image_url = ' http://192.168.43.199:8080/' + product?.cover_image
+
+        return view.render('products/show', { product, foo })
     }
 
     public async store({ request, response }: HttpContextContract) {
 
-        const validationSchema = schema.create({
-            name: schema.string({ trim: true }, [
-                rules.maxLength(255),
-            ]),
-            image: schema.file({
-                size: '2mb',
-                extnames: ['jpg', 'png', 'jpeg'],
-            }),
-        })
-
-        const data = await request.validate({
-            schema: validationSchema,
-            messages: {
-                'name.required': 'Please Enter name value',
-                'name.maxLength': 'The name value can not be more than 255 char',
-                'image.file.extname': 'You can only upload images',
-                'image.file.size': 'Image size must be under 2mb',
-            }
-        })
+        const data = await request.validate(ProductValidator)
 
         const imageName = `${new Date().getTime()}.${data.image.extname}`
 
@@ -65,6 +52,8 @@ export default class ProductsController {
     public async destory({ params, response, session }: HttpContextContract) {
 
         const product = await Product.findOrFail(params.id)
+
+        return response.status(200).json(product)
 
         const image = Application.tmpPath('uploads/') + product?.cover_image
 

@@ -19,11 +19,18 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import Redis from '@ioc:Adonis/Addons/Redis'
 
-Route.on('/test').render('welcome')
+Route.get('/signup', async () => {
+  await Redis.publish('music', JSON.stringify({ name: 'Track 1' }))
+  await Redis.publish('user:signups', JSON.stringify({ id: 1 }))
+  return 'handled'
+})
 
-Route.get('/', 'ProductsController.index').as('products.index')
+Route.on('/').render('welcome')
+
+Route.get('/products', 'ProductsController.index').as('products.index')
 Route.get('/products/:id', 'ProductsController.show').as('products.show')
-Route.delete('/products/:id', 'ProductsController.destory').as('products.delete1')
-// Route.post('/products/:id', 'ProductsController.destory').as('products.delete')
+Route.delete('/products/:id', 'ProductsController.destory').as('products.delete')
+Route.put('/products/:id', 'ProductsController.update').as('products.update')
 Route.post('/products', 'ProductsController.store').as('products.store')

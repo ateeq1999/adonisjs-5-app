@@ -15,7 +15,13 @@
   },
   "preloads": [
     "./start/routes",
-    "./start/kernel"
+    "./start/kernel",
+    {
+      "file": "./start/redis",
+      "environment": [
+        "web"
+      ]
+    }
   ],
   "providers": [
     "./providers/AppProvider",
@@ -24,7 +30,8 @@
     "@adonisjs/view",
     "@adonisjs/lucid",
     "@adonisjs/auth",
-    "@adonisjs/shield"
+    "@adonisjs/shield",
+    "@adonisjs/redis"
   ],
   "metaFiles": [
     {

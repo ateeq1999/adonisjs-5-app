@@ -44,9 +44,9 @@
                         <h1>{{ product.name }}</h1>
                     </div>
                     <div class="box">
-                        <img src="{{ `http://192.168.8.101:8080/${product.cover_image}` }}" alt="Image">
+                        <img src="{{ `http://192.168.43.199:8080/${product.cover_image}` }}" alt="Image">
                     </div>
-                    <form action="{{ `/products/${product.id}?_method=DELETE` }}" method="POST" enctype="multipart/form-data" class="box">
+                    <form action="{{ route('products.delete', { params: { id: `${product.id}` } }) + '?_method=DELETE' }}" method="post" class="box">
                         {{ csrfField() }}
                         <button type="submit" class="button is-danger">
                             Delete
