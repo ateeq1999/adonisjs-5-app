@@ -3,5 +3,24 @@
         <div class="navbar-brand">
             <a href="/" class="navbar-item">Home</a>
         </div>
+        <div class="navbar-menu">
+            <div class="navbar-end">
+                @if(auth.isLoggedIn)
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a href="" class="navbar-link">{{ auth.user.name }}</a>
+                        <div class="navbar-dropdown">
+                            <div class="navbar-item">
+                                <a href="/logout" class="navbar-item">
+                                    <span>Logout</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <a href="/register" class="navbar-item"><span>Register</span></a>
+                    <a href="/login" class="navbar-item"><span>Login</span></a>
+                @endif
+            </div>
+        </div>
     </div>
 </nav>

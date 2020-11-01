@@ -1,5 +1,4 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
-// import Driver from '@adonisjs/drive/providers/DriveProvider'
 
 export default class AppProvider {
 	public static needsApplication = true

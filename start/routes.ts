@@ -30,6 +30,7 @@ Route.get('/signup', async () => {
 Route.on('/').render('welcome')
 
 Route.get('/products', 'ProductsController.index').as('products.index')
+// .middleware('auth')
 Route.get('/products/:id', 'ProductsController.show').as('products.show')
 Route.delete('/products/:id', 'ProductsController.destory').as('products.delete')
 Route.put('/products/:id', 'ProductsController.update').as('products.update')
