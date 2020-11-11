@@ -10,24 +10,19 @@
 </head>
 <body>
   <div id="app">
-    <products-index></products-index>
+    <h1>Welcome page</h1>
   </div>
-  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+
   <script>
-    io()
-    const app = Vue.createApp({
-      // el: '#app',
-      data(){
-        return {
-          name: "Ateeq"
-        }
-      },
-      created(){
-        console.log(this.name)
-      }
-    }).mount('#app')
-    app.component('products-index', {
-      
+    const socket = io('http://localhost:3333');
+    socket.on('news', (data) => {
+      console.log(data);
+      socket.emit('client_event', { my: 'clints Data' });
+    });
+    socket.on('product-created', (data) => {
+        console.log(data)
+        socket.emit('client_event', { event: 'product-created-event', data });
     })
   </script>
 </body>

@@ -1,4 +1,5 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
+import { IocContract } from '@adonisjs/fold'
 
 export default class AppProvider {
 	public static needsApplication = true
@@ -15,7 +16,16 @@ export default class AppProvider {
   }
 
   public async ready () {
+    const App = await import('@ioc:Adonis/Core/Application')
+    
     // App is ready
+    /**
+     * Only import socket file, when environment is `web`. In other
+     * words do not import during ace commands.
+     */
+    if (App.default.environment === 'web') {
+      await import('../start/socket')
+    }
   }
 
   public async shutdown () {

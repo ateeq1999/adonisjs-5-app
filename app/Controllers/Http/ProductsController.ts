@@ -7,12 +7,15 @@ import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import Application from '@ioc:Adonis/Core/Application'
 import ProductValidator from 'App/Validators/ProductValidator'
 import Redis from '@ioc:Adonis/Addons/Redis'
+import Ws from 'App/Services/Ws'
 
 export default class ProductsController {
     
     public async index({ view }: HttpContextContract) {
 
         const products = await Product.all()
+
+        Ws.io.emit('product-created', { event: "product-created", data: products })
 
         return view.render('products/index', { products })
     }
