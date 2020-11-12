@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, manyToMany, ManyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Product from 'App/Models/Product'
 
 export default class Category extends BaseModel {
@@ -21,13 +21,12 @@ export default class Category extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  // @manyToMany(() => Product)
-  @manyToMany(() => Product, {
-    localKey: 'id',
-    pivotForeignKey: 'product_id',
-    relatedKey: 'id',
-    pivotRelatedForeignKey: 'product_id',
-    pivotTable: 'category_products',
-  })
+  // @manyToMany(() => Product, 'products', {
+  //   localKey: 'id',
+  //   pivotForeignKey: 'category_id',
+  //   relatedKey: 'id',
+  //   pivotRelatedForeignKey: 'product_id',
+  //   pivotTable: 'product_categories',
+  // })
   public products: ManyToMany<typeof Product>
 }
