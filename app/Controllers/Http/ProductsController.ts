@@ -1,11 +1,8 @@
-// import Cloudinary from 'App/Services/Cloudinary'
-const fs = require('fs');
-
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Product from 'App/Models/Product'
 import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import Application from '@ioc:Adonis/Core/Application'
 import ProductValidator from 'App/Validators/ProductValidator'
+import Product from 'App/Models/Product'
 import Redis from '@ioc:Adonis/Addons/Redis'
 import Ws from 'App/Services/Ws'
 
