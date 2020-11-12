@@ -53,7 +53,7 @@ export default class ProductsController {
             cover_image: imageName,
         })
 
-        await data.image.move(Application.tmpPath('uploads'), {
+        await data.image.move(Application.tmpPath('uploads/products'), {
             name: `${imageName}`,
         })
 
@@ -66,7 +66,7 @@ export default class ProductsController {
 
         return response.status(200).json(product)
 
-        const image = Application.tmpPath('uploads/') + product?.cover_image
+        const image = Application.tmpPath('uploads/products') + product?.cover_image
 
         if(fs.existsSync(image)){
             // delete a file
