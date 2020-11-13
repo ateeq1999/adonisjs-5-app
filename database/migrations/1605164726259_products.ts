@@ -8,9 +8,9 @@ export default class Products extends BaseSchema {
       table.increments('id').primary()
       table.string('name', 100).notNullable()
       table.string('cover_image').nullable()
-      table.integer('quantity').notNullable().default(0.00)
-      table.integer('price').notNullable().default(0.00)
-      table.boolean('is_active').notNullable()
+      table.integer('quantity').notNullable().defaultTo(0.00)
+      table.integer('price').notNullable().defaultTo(0.00)
+      table.boolean('is_active').defaultTo(0)
       table.timestamps(true)
     })
   }

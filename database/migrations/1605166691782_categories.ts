@@ -8,7 +8,7 @@ export default class Categories extends BaseSchema {
       table.increments('id')
       table.string('name', 100).notNullable()
       table.string('cover_image').nullable()
-      table.boolean('is_active').notNullable()
+      table.boolean('is_active').defaultTo(0)
       table.timestamps(true)
     })
   }
