@@ -48,7 +48,7 @@
     }
   ],
   "directories": {
-    "public": "./tmp/uploads"
+    "public": "./tmp"
   },
   "aceProviders": [
     "@adonisjs/repl"

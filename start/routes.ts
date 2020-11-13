@@ -10,7 +10,8 @@ Route.get('/signup', async () => {
   return 'handled'
 })
 
-Route.on('/').render('welcome')
+Route.on('/').render('home')
+// Route.on('/').render('welcome')
 
 // Products Routes
 import './product'
