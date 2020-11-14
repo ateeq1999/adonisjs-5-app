@@ -2,6 +2,7 @@ import Factory from '@ioc:Adonis/Lucid/Factory'
 import User from 'App/Models/User'
 import Product from 'App/Models/Product'
 import Category from 'App/Models/Category'
+import Role from 'App/Models/Role'
 
 const randFunction = (value) => {
     return Math.floor(Math.random() * Math.floor(value))
@@ -17,7 +18,7 @@ export const UserFactory = Factory
   })
   .build()
 
-  export const CategoryFactory = Factory
+export const CategoryFactory = Factory
   .define(Category, ({ faker }) => {
     return {
       name: faker.internet.userName(),
@@ -25,6 +26,15 @@ export const UserFactory = Factory
     }
   })
 //   .relation('products', () => ProductFactory)
+  .build()
+
+export const RoleFactory = Factory
+  .define(Role, ({ faker }) => {
+    return {
+      title: faker.internet.userName(),
+    }
+  })
+  // .relation('users', () => UserFactory)
   .build()
 
 export const ProductFactory = Factory

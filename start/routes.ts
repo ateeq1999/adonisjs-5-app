@@ -21,3 +21,5 @@ import './routes/category'
 import './routes/role'
 // Permissions Routes
 import './routes/permission'
+// Users Routes
+import './routes/user'
