@@ -1,0 +1,73 @@
+@layout('layouts/app')
+
+@section('content')
+    <div class="container">
+        @if(flashMessages.has('success'))
+            <div class="box">
+                <p class="help is-success">
+                    {{ flashMessages.get('success') }}
+                </p>
+            </div>
+        @endif
+        <div class="box">
+            <h1>Products Index Page</h1>
+        </div>
+        <div class="box">
+            <form action="{{ route('roles.store') }}" method="POST" enctype="multipart/form-data">
+                {{ csrfField() }}
+                <div class="field has-addons">
+                    <div class="control is-expanded">
+                        <input type="text" name="title" class="input {{ flashMessages.has('errors.title') ? 'is-danger' : '' }}">
+                    </div>
+                    <div class="control">
+                        <button type="submit" class="button is-link">Submit</button>
+                    </div>
+                </div>
+                @if( flashMessages.has('errors.title') )
+                    <p class="help is-danger">
+                        {{ flashMessages.get('errors.title') }}
+                    </p>
+                @endif
+            </form>
+        </div>
+        <div class="container">
+            <div class="box">
+                <div class="box">
+                    <table>
+                        <thead>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </thead>
+                        <tbody>
+                            @each(role in roles)
+                                <tr>
+                                    <td>
+                                        {{ role.id }}
+                                    </td>
+                                    <td>
+                                        {{ role.title }}
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('roles.delete', { params: { id: `${role.id}` } }) + '?_method=DELETE' }}" method="post">
+                                            {{ csrfField() }}
+                                            <button type="submit" class="button is-danger">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

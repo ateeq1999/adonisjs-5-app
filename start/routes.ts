@@ -14,6 +14,10 @@ Route.on('/').render('home')
 // Route.on('/').render('welcome')
 
 // Products Routes
-import './product'
+import './routes/product'
 // Categories Routes
-import './category'
+import './routes/category'
+// Roles Routes
+import './routes/role'
+// Permissions Routes
+import './routes/permission'
