@@ -1,5 +1,5 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import { UserFactory } from 'Database/factories'
+// import { UserFactory } from 'Database/factories'
 import User from 'App/Models/User'
 
 export default class UserSeeder extends BaseSeeder {

@@ -27,13 +27,12 @@ export default class Product extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @manyToMany(() => Category, 'categories', {
-    localKey: 'id',
+  @manyToMany(() => Category, {
+     localKey: 'id',
     pivotForeignKey: 'product_id',
     relatedKey: 'id',
     pivotRelatedForeignKey: 'category_id',
-    pivotTable: 'product_categories',
+    pivotTable: 'category_product',
   })
   public categories: ManyToMany<typeof Category>
-  // @manyToMany(() => Category)
 }
