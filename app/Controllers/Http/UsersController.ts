@@ -5,7 +5,7 @@ import User from 'App/Models/User'
 export default class UsersController {
     public async index ({ request, response, view }: HttpContextContract) {
 
-        const users = await User.query().preload('roles').all()
+        const users = await User.query().preload('roles')
 
 
         return response.status(200).json(users)
@@ -18,9 +18,7 @@ export default class UsersController {
         const data = request.validate(UserValidator)
 
         if(data.roles){
-            for (let role of Object.values(roles)) {
-                await user.related('roles').save(role)
-            }
+            await user.related('roles').attach(data.roles)
         }
 
         return response.status(200).json({

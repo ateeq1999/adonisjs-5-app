@@ -9,26 +9,9 @@
                 </p>
             </div>
         @endif
+        {{ inspect(roles[1].permissions[4].$attributes.id) }}
         <div class="box">
             <h1>Products Index Page</h1>
-        </div>
-        <div class="box">
-            <form action="{{ route('roles.store') }}" method="POST" enctype="multipart/form-data">
-                {{ csrfField() }}
-                <div class="field has-addons">
-                    <div class="control is-expanded">
-                        <input type="text" name="title" class="input {{ flashMessages.has('errors.title') ? 'is-danger' : '' }}">
-                    </div>
-                    <div class="control">
-                        <button type="submit" class="button is-link">Submit</button>
-                    </div>
-                </div>
-                @if( flashMessages.has('errors.title') )
-                    <p class="help is-danger">
-                        {{ flashMessages.get('errors.title') }}
-                    </p>
-                @endif
-            </form>
         </div>
         <div class="container">
             <div class="box">

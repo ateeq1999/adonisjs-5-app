@@ -1,0 +1,63 @@
+@layout('layouts/app')
+
+@section('content')
+    <div class="container">
+        @if(flashMessages.has('success'))
+            <div class="box">
+                <p class="help is-success">
+                    {{ flashMessages.get('success') }}
+                </p>
+            </div>
+        @endif
+        <div class="box">
+            <h1>Roles Create Page</h1>
+        </div>
+        {{--  {{ inspect(permissions[0].$attributes.id) }}  --}}
+        <div class="box">
+            <form action="{{ route('roles.store') }}" method="POST" enctype="multipart/form-data">
+                {{ csrfField() }}
+                <div class="field has-addons">
+                    <div class="container">
+                        <div class="box">
+                            <div class="control is-expanded">
+                                <input type="text" name="title" class="input {{ flashMessages.has('errors.title') ? 'is-danger' : '' }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field has-addons">
+                    <div class="container">
+                        <div class="box">
+                            <div class="select is-multiple">
+                                <select size="8" name="permissions[]" multiple class="input {{ flashMessages.has('errors.permissions') ? 'is-danger' : '' }}">
+                                    @each(permission in permissions)
+                                        <option value="{{ permission.$attributes.id }}">{{ permission.$attributes.title }}</option>
+                                    @endeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field has-addons">
+                    <div class="container">
+                        <div class="box">
+                            <div class="control">
+                                <button type="submit" class="button is-link">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if( flashMessages.has('errors.title') )
+                    <p class="help is-danger">
+                        {{ flashMessages.get('errors.title') }}
+                    </p>
+                @endif
+                @if( flashMessages.has('errors.permissions') )
+                    <p class="help is-danger">
+                        {{ flashMessages.get('errors.permissions') }}
+                    </p>
+                @endif
+            </form>
+        </div>
+    </div>
+@endsection
