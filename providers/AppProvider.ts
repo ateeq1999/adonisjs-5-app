@@ -1,5 +1,5 @@
 import { ApplicationContract } from '@ioc:Adonis/Core/Application'
-import { IocContract } from '@adonisjs/fold'
+// import { IocContract } from '@adonisjs/fold'
 
 export default class AppProvider {
 	public static needsApplication = true

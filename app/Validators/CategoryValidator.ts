@@ -9,7 +9,7 @@ export default class CategoryValidator {
 		name: schema.string({ trim: true }, [
 			rules.maxLength(255),
 		]),
-		is_active: schema.boolean()
+		is_active: schema.boolean(),
 		cover_image: schema.file({
 			size: '2mb',
 			extnames: ['jpg', 'png', 'jpeg'],

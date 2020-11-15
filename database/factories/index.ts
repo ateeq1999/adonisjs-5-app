@@ -5,15 +5,16 @@ import Category from 'App/Models/Category'
 import Role from 'App/Models/Role'
 
 const randFunction = (value) => {
-    return Math.floor(Math.random() * Math.floor(value))
+  return Math.floor(Math.random() * Math.floor(value))
 }
 
 export const UserFactory = Factory
   .define(User, ({ faker }) => {
     return {
-      username: faker.internet.userName,
-      email: faker.internet.email,
-      password: faker.internet.password,
+      name: faker.internet.userName(),
+      email: faker.internet.email(),
+      phone: '0991612921',
+      password: faker.internet.password(),
     }
   })
   .build()
@@ -22,10 +23,9 @@ export const CategoryFactory = Factory
   .define(Category, ({ faker }) => {
     return {
       name: faker.internet.userName(),
-      is_active: randFunction(2)
+      is_active: false
     }
   })
-//   .relation('products', () => ProductFactory)
   .build()
 
 export const RoleFactory = Factory
@@ -41,12 +41,12 @@ export const ProductFactory = Factory
   .define(Product, ({ faker }) => {
     return {
       name: faker.internet.userName(),
+      cover_image: '1603718874137.jpg',
       price:  randFunction(10000),
       quantity:  randFunction(50),
-      is_active: randFunction(2)
+      is_active: false
     }
   })
-//   .relation('categories', () => CategoryFactory)
   .build()
 
 

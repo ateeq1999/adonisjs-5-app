@@ -1,11 +1,9 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import { schema, rules } from '@ioc:Adonis/Core/Validator'
-import Database from '@ioc:Adonis/Lucid/Database'
 import Application from '@ioc:Adonis/Core/Application'
 import ProductValidator from 'App/Validators/ProductValidator'
 import Product from 'App/Models/Product'
-import Redis from '@ioc:Adonis/Addons/Redis'
 import Ws from 'App/Services/Ws'
+import fs from 'fs'
 
 export default class ProductsController {
     
@@ -22,22 +20,9 @@ export default class ProductsController {
 
         const product = await Product.findOrFail(params.id)
 
-        await Redis.set('foo', 'bar')
-        const foo = await Redis.get('foo')
+        await product.preload('categories')
 
-        product?.image_url = ' http://192.168.43.199:8080/' + product?.cover_image
-
-        return view.render('products/show', { product, foo })
-    }
-
-    public async show_categories({ view, params, response }: HttpContextContract) {
-
-        const categories = await Database.from('product_categories')
-                        .select(['id', 'name', 'cover_image', 'is_active', 'created_at', 'updated_at'])
-                        .where('product_id', params.id)
-                        .innerJoin('categories', 'categories.id', 'product_categories.category_id')
-
-        return response.status(200).json(categories)
+        return view.render('products/show', { product })
     }
 
     public async store({ request, response }: HttpContextContract) {

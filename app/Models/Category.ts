@@ -26,7 +26,7 @@ export default class Category extends BaseModel {
     pivotForeignKey: 'category_id',
     relatedKey: 'id',
     pivotRelatedForeignKey: 'product_id',
-    pivotTable: 'category_product',
+    pivotTable: 'product_category',
   })
   public products: ManyToMany<typeof Product>
 }

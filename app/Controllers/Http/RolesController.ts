@@ -17,7 +17,7 @@ export default class RolesController {
     return view.render('roles.create', { permissions })
   }
 
-  public async store ({ request, response, view, session }: HttpContextContract) {
+  public async store ({ request, response, session }: HttpContextContract) {
     const data = await request.validate(RoleValidator)
 
     const role = await Role.create({
@@ -33,7 +33,7 @@ export default class RolesController {
     return response.redirect('roles.index')
   }
 
-  public async show ({ request, response, params, view }: HttpContextContract) {
+  public async show ({ params, view }: HttpContextContract) {
     const role = await Role.findOrFail(params.id)
 
     await role.preload('permissions')
@@ -41,7 +41,7 @@ export default class RolesController {
     return view.render('roles.show', { role })
   }
 
-  public async edit ({ request, response, params, view }: HttpContextContract) {
+  public async edit ({ params, view }: HttpContextContract) {
     const role = await Role.findOrFail(params.id)
     
     await role.preload('permissions')
@@ -53,16 +53,18 @@ export default class RolesController {
   public async update ({ request, response, params, session }: HttpContextContract) {
     const data = await request.validate(RoleValidator)
 
-    const role = Role.findOrFail(params.id)
+    const role = await Role.findOrFail(params.id)
 
-    await role.update(data)
+    role.title = data.title
+
+    await role.save()
 
     session.flash('success', 'Role Updated Successfuly')
 
     return response.redirect('back')
   }
 
-  public async destroy ({ request, response, params, session }: HttpContextContract) {
+  public async destroy ({ response, params, session }: HttpContextContract) {
     const role = await Role.findOrFail(params.id)
 
     await role.delete()

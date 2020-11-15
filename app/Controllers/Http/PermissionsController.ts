@@ -13,7 +13,7 @@ export default class PermissionsController {
     return view.render('permissions.create')
   }
 
-  public async store ({ request, response, view, session }: HttpContextContract) {
+  public async store ({ request, response, session }: HttpContextContract) {
     const data = await request.validate(PermissionValidator)
 
     await Permission.create(data)
@@ -23,13 +23,13 @@ export default class PermissionsController {
     return response.redirect('back')
   }
 
-  public async show ({ request, response, params, view }: HttpContextContract) {
+  public async show ({ params, view }: HttpContextContract) {
     const permission = await Permission.findOrFail(params.id)
 
     return view.render('permissions.show', { permission })
   }
 
-  public async edit ({ request, response, params, view }: HttpContextContract) {
+  public async edit ({ params, view }: HttpContextContract) {
     const permission = await Permission.findOrFail(params.id)
 
     return view.render('permissions.edit', { permission })
@@ -38,16 +38,18 @@ export default class PermissionsController {
   public async update ({ request, response, params, session }: HttpContextContract) {
     const data = await request.validate(PermissionValidator)
 
-    const permission = Permission.findOrFail(params.id)
+    const permission = await Permission.findOrFail(params.id)
 
-    await permission.update(data)
+    permission.title = data.title
+
+    await permission.save()
 
     session.flash('success', 'Permission Updated Successfuly')
 
     return response.redirect('back')
   }
 
-  public async destroy ({ request, response, params, session }: HttpContextContract) {
+  public async destroy ({ response, params, session }: HttpContextContract) {
     const permission = await Permission.findOrFail(params.id)
 
     await permission.delete()

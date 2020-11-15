@@ -1,8 +1,5 @@
 import Route from '@ioc:Adonis/Core/Route'
 import Redis from '@ioc:Adonis/Addons/Redis'
-import Product from 'App/Models/Product'
-import Category from 'App/Models/Category'
-import Database from '@ioc:Adonis/Lucid/Database'
 
 Route.get('/signup', async () => {
   await Redis.publish('music', JSON.stringify({ name: 'Track 1' }))
