@@ -8,9 +8,3 @@ Route.delete('/categories/:id', 'CategoriesController.destory').as('categories.d
 Route.put('/categories/:id', 'CategoriesController.update').as('categories.update')
 Route.post('/categories', 'CategoriesController.store').as('categories.store')
 Route.get('/categories/:id/products', 'CategoriesController.show_products').as('categories.show.products')
-
-Route.post('/categories/:id/products', async ({ params, request }) => {
-    const data = await Database.table('product_categories')
-                    .insert({ category_id: params.id, product_id: request.product_id })
-    return data;
-})
