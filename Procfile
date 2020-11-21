@@ -1,1 +1,1 @@
-web: node ace serve --watch
+web: node ace build --production && cd build && node server.js

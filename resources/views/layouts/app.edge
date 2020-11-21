@@ -5,13 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello Bulma!</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+
+    <script>
+      const socket = io('http://localhost:3333');
+      window.Ws = socket
+      // socket.on('news', (data) => {
+      //   console.log(data);
+      //   socket.emit('client_event', { my: 'clints Data' });
+      // });
+      // socket.on('product-created', (data) => {
+      //     console.log(data)
+      //     socket.emit('client_event', { event: 'product-created-event', data });
+      // })
+    </script>
   </head>
     <body>
         @include('layouts/partials/_navbar')
         <section class="section">
-            <div class="container">
+          <div class="container">
             @!section('content')
-            </div>
+          </div>
         </section>
     </body>
 </html>

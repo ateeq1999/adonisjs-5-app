@@ -1,0 +1,50 @@
+@layout('layouts/app')
+
+@section('content')
+    <div class="container">
+        @if(flashMessages.has('success'))
+            <div class="box">
+                <p class="help is-success">
+                    {{ flashMessages.get('success') }}
+                </p>
+            </div>
+        @endif
+        <div class="box">
+            <h1>Orders Create Page</h1>
+        </div>
+        <div class="box">
+            <form action="{{ route('orders.store') }}" method="POST" enctype="multipart/form-data">
+                {{ csrfField() }}
+                <div class="field has-addons">
+                    <div class="container">
+                        <div class="box">
+                            <div class="control is-expanded">
+                                <input type="text" name="title" class="input {{ flashMessages.has('errors.title') ? 'is-danger' : '' }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field has-addons">
+                    <div class="container">
+                        <div class="box">
+                            <div class="control">
+                                <button onsubmit="sendEvent()" type="submit" class="button is-link">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if( flashMessages.has('errors.title') )
+                    <p class="help is-danger">
+                        {{ flashMessages.get('errors.title') }}
+                    </p>
+                @endif
+            </form>
+        </div>
+    </div>
+    <script>
+        sendEvent(){
+            console.log('welcome from the event function')
+            Ws.emit('order_created');
+        }
+    </script>
+@endsection

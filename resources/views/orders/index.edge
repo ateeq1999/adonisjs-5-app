@@ -1,0 +1,82 @@
+@layout('layouts/app')
+
+@section('content')
+    <div class="container">
+        @if(flashMessages.has('success'))
+            <div class="box">
+                <p class="help is-success">
+                    {{ flashMessages.get('success') }}
+                </p>
+            </div>
+        @endif
+        <div class="box">
+            <h1>Orders Index Page</h1>
+        </div>
+        <div class="container">
+            <div class="box">
+                <div class="box">
+                    <table>
+                        <thead>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                Title
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </thead>
+                        <tbody id="orders-table">
+                            @each(order in orders)
+                                <tr>
+                                    <td>
+                                        {{ order.id }}
+                                    </td>
+                                    <td>
+                                        {{ order.title }}
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('orders.delete', { params: { id: `${order.id}` } }) + '?_method=DELETE' }}" method="post">
+                                            {{ csrfField() }}
+                                            <button type="submit" class="button is-danger">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        socket.on('news', (data) => {
+            console.log(data)
+        })
+        socket.on('new-order', (data) => {
+            const table = document.getElementById('orders-table')
+            const order = data
+            if(order){
+                table.innerHTML+=`<tr>
+                                    <td>
+                                        ${order.id}
+                                    </td>
+                                    <td>
+                                        ${order.title}
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('orders.delete', { params: { id: '${order.id}' } }) + '?_method=DELETE' }}" method="post">
+                                            {{ csrfField() }}
+                                            <button type="submit" class="button is-danger">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>`
+            }
+        })
+    </script>
+@endsection
