@@ -1,6 +1,7 @@
 @layout('layouts/app')
 
 @section('content')
+  @set('messagesData', messages)
   <div class="container">
     <div class="box">
       <h1>Chat Room Number {{ room.id }}</h1>
@@ -8,7 +9,7 @@
 
     <div class="box">
       @if(messages)
-        @each(message in messages)
+        @each(message in messagesData)
           <ul id="messages-list">
             <li>
               {{ message.text }}

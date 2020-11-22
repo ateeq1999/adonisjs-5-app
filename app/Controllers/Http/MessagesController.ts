@@ -19,7 +19,7 @@ export default class MessagesController {
     const messages = await Database.from('messages')
                                     .where(
                                       'room_id', room.id
-                                    )
+                                    ).orderBy('created_at')
 
     return view.render('messages/chat', { room, messages })
   }
@@ -41,17 +41,21 @@ export default class MessagesController {
       messages: {
         'text.required': 'Enter message text',
         'text.maxLength': 'Message text can not exceed 255 character',
+        'room_id.required': 'Please Enter {{ field }} value',
+        'driver_id.required': 'Please Enter {{ field }} value',
       },
     })
 
-    const message = await auth.user?.related('messages').create({
+    const data = {
       text: validatedData.text,
       room_id: `${validatedData.user_id}_and_${validatedData.driver_id}`,
-      // user_id: validatedData.user_id,
+      user_id: validatedData.user_id,
       driver_id: validatedData.driver_id
-    })
+    }
 
-    await Redis.publish('new:message', JSON.stringify(message))
+    await Redis.publish('new:message', JSON.stringify(data))
+
+    const message = await auth.user?.related('messages').create(data)
 
     session.flash('notification', 'Message added!')
 
