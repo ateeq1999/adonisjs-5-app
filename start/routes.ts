@@ -1,19 +1,11 @@
 import Route from '@ioc:Adonis/Core/Route'
 import Redis from '@ioc:Adonis/Addons/Redis'
 
-// Redis.subscribe('new:order', (user: string) => {
-//   console.log(JSON.parse(user))
-// })
-
-Route.get('/signup', async () => {
-  await Redis.publish('music', JSON.stringify({ name: 'Track 1' }))
-  await Redis.publish('user:signups', JSON.stringify({ id: 1 }))
-  return 'handled'
-})
-Route.get('/new-order', async () => {
-  await Redis.publish('new-order', JSON.stringify({ name: 'Track 1' }))
-  return 'handled'
-})
+Route.get('/register', 'AuthController.showRegister').middleware('guest')
+Route.post('/register', 'AuthController.register')
+Route.post('/logout', 'AuthController.logout')
+Route.get('/login', 'AuthController.showLogin').middleware('guest')
+Route.post('/login', 'AuthController.login')
 
 Route.on('/').render('home')
 // Route.on('/').render('welcome')

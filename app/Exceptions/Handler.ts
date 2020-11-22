@@ -39,6 +39,14 @@ export default class ExceptionHandler extends HttpExceptionHandler {
       return ctx.response.status(404).send(error.messages)
     }
 
+    if (error.code === 'ER_NO_DEFAULT_FOR_FIELD') {
+      return ctx.response.status(404).send(error.messages)
+    }
+
+    if (error.code === 'ER_DATA_TOO_LONG') {
+      return ctx.response.status(404).send(error.messages)
+    }
+
     return super.handle(error, ctx)
   }
 }

@@ -1,18 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
-  <link rel="stylesheet" href="css/app.css">
-</head>
-<body>
-  <div id="app">
+@layout('layouts/app')
+
+@section('content')
+  <div class="container">
+    @if(flashMessages.has('success'))
+        <div class="box">
+          <p class="help is-danger">
+            {{ flashMessages.get('success') }}
+          </p>
+        </div>
+    @endif
     <h1>Home page</h1>
-    {{--  @set('username', 'ateeg')
-    {{ inspect({ username, age: 28, isAdmin: true }) }}  --}}
-    <img src="/uploads/1603718874137.jpg" alt="">
   </div>
-  <script src="js/app.js"></script>
-</body>
-</html>
+@endsection
