@@ -22,3 +22,5 @@ import './routes/role'
 import './routes/permission'
 // Users Routes
 import './routes/user'
+// Messages Routes
+import './routes/message'

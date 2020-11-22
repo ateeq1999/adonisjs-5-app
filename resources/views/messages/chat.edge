@@ -1,0 +1,62 @@
+@layout('layouts/app')
+
+@section('content')
+  <div class="container">
+    <div class="box">
+      <h1>Chat Room Number {{ room.id }}</h1>
+    </div>
+
+    <div class="box">
+      @if(messages)
+        @each(message in messages)
+          <ul id="messages-list">
+            <li>
+              {{ message.text }}
+            </li>
+          </ul>
+        @endeach
+      @endif
+    </div>
+
+    <div class="box">
+      <form action="{{ route('messages.store') }}" method="POST" enctype="multipart/form-data">
+          {{ csrfField() }}
+          <div class="field has-addons">
+              <div class="container">
+                  <div class="box">
+                      <div class="control is-expanded">
+                          <input type="text" name="text" class="input {{ flashMessages.has('errors.text') ? 'is-danger' : '' }}">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <input style="display: none" type="text" name="room_id" value="{{ room.id }}">
+          <input style="display: none" type="text" name="user_id" value="{{ room.user }}">
+          <input style="display: none" type="text" name="driver_id" value="{{ room.driver }}">
+          <div class="field has-addons">
+              <div class="container">
+                  <div class="box">
+                      <div class="control">
+                          <button onsubmit="sendEvent()" type="submit" class="button is-link">Submit</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          @if( flashMessages.has('errors.text') )
+              <p class="help is-danger">
+                  {{ flashMessages.get('errors.text') }}
+              </p>
+          @endif
+      </form>
+    </div>
+  </div>
+  <script>
+    socket.on('new-message', (data) => {
+      const list = document.getElementById('messages-list')
+      const message = data
+      if(message){
+        list.innerHTML+=`<li>${message.text}</li>`
+      }
+    })
+</script>
+@endsection

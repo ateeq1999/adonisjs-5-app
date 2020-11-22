@@ -1,0 +1,23 @@
+@layout('layouts/app')
+
+@section('content')
+  <div class="container">
+    @if(flashMessages.has('success'))
+        <div class="box">
+          <p class="help is-danger">
+            {{ flashMessages.get('success') }}
+          </p>
+        </div>
+    @endif
+    <h1>Chat page {{ driver.id }}</h1>
+    <ul>
+        <li>
+            <form action="{{ route('messages.create', { params: { id: `${auth.user.id}`, driver: `${driver.id}` } }) }}" method="get">
+                <button type="submit" class="button is-danger">
+                    Open Chat
+                </button>
+            </form>
+        </li>
+    </ul>
+  </div>
+@endsection

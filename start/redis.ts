@@ -23,3 +23,9 @@ Redis.subscribe('new:orders', (data: Object) => {
     // emit an event at the socket
     Ws.io.emit('new-order', JSON.parse(data))
 })
+
+// Subscibe to new:orders channel
+Redis.subscribe('new:message', (data: Object) => {
+    // emit an event at the socket
+    Ws.io.emit('new-message', JSON.parse(data))
+})

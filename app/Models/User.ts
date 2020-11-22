@@ -5,9 +5,12 @@ import {
   beforeSave,
   BaseModel,
   manyToMany, 
-  ManyToMany
+  ManyToMany,
+  hasMany,
+  HasMany
 } from '@ioc:Adonis/Lucid/Orm'
 import Role from 'App/Models/Role'
+import Message from './Message'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -49,4 +52,7 @@ export default class User extends BaseModel {
     pivotTable: 'role_user',
   })
   public roles: ManyToMany<typeof Role>
+  
+  @hasMany(() => Message)
+  public messages: HasMany<typeof Message>
 }
