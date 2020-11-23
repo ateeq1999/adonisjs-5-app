@@ -7,7 +7,7 @@ Route.post('/logout', 'AuthController.logout')
 Route.get('/login', 'AuthController.showLogin').middleware('guest')
 Route.post('/login', 'AuthController.login')
 
-Route.on('/').render('home')
+Route.on('/').render('home').middleware('auth')
 // Route.on('/').render('welcome')
 
 // Products Routes

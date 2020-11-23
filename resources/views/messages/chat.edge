@@ -9,13 +9,13 @@
 
     <div class="box">
       @if(messages)
-        @each(message in messagesData)
-          <ul id="messages-list">
-            <li>
+        <ul id="messages-list">
+          @each(message in messagesData)
+            <li id="{{ auth.user.id }}" class="{{ `${message.user_id}` === `${auth.user.id}` ? 'to_me' : 'from_me' }}">
               {{ message.text }}
             </li>
-          </ul>
-        @endeach
+          @endeach
+        </ul>
       @endif
     </div>
 
@@ -54,10 +54,9 @@
   <script>
     socket.on('new-message', (data) => {
       const list = document.getElementById('messages-list')
-      const message = data
-      if(message){
-        list.innerHTML+=`<li>${message.text}</li>`
-      }
+      const messageElement = document.createElement("li");
+      messageElement.innerHTML = data.text
+      list.appendChild(messageElement);
     })
 </script>
 @endsection

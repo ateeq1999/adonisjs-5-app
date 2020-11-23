@@ -14,12 +14,12 @@ export default class MessagesController {
 
   public async create ({ view, request, auth, params }: HttpContextContract) {
 
-    const room = { id: `${params.id}_and_${params.driver}`, user: params.id, driver: params.driver  }
+    // const room = { id: `${params.id}_and_${params.driver}`, user: params.id, driver: params.driver  }
+    const room = { id: `1_and_2`, user: params.id, driver: params.driver  }
 
     const messages = await Database.from('messages')
-                                    .where(
-                                      'room_id', room.id
-                                    ).orderBy('created_at')
+                                    .where('room_id', room.id)
+                                    .orderBy('created_at')
 
     return view.render('messages/chat', { room, messages })
   }
@@ -48,7 +48,8 @@ export default class MessagesController {
 
     const data = {
       text: validatedData.text,
-      room_id: `${validatedData.user_id}_and_${validatedData.driver_id}`,
+      room_id: `1_and_2`,
+      // room_id: `${validatedData.user_id}_and_${validatedData.driver_id}`,
       user_id: validatedData.user_id,
       driver_id: validatedData.driver_id
     }
