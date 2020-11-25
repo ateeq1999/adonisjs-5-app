@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;1,600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* body {
+    background: #d7dceb;
+    background: -webkit-linear-gradient(to right, #d7dceb, #e2e2e2);
+    background: linear-gradient(to right, #d7dceb, #e2e2e2);
+} */

@@ -1,0 +1,20 @@
+<div class="w-96 {{ dark ? 'dark' : '' }}">
+    <div class="bg-white dark:bg-gray-900 rounded-lg shadow-2xl overflow-hidden">
+        <div class="p-6 space-y-2">
+            <h1 class="text-lg font-bold text-gray-800 dark:text-gray-200">{{ title }}</h1>
+            <p class="text-sm text-gray-500 dark:text-gray-400">{{ description }}</p>
+        </div>
+        <div class="px-6 py-3 dark:bg-gray-700 bg-gray-200 flex items-center justify-end divide-x-2 divide-gray-400 dark:divide-gray-500 divide-dashed">
+            <div class="pr-4">
+                <button class="text-sm font-medium text-green-700 dark:text-green-400 hover:text-green-800 dark:hover:text-green-500 focus:outline-none focus:shadow-outline">
+                    {{ actions.first }}
+                </button>
+            </div>
+            <div class="pl-4">
+                <button class="px-4 py-1 rounded-full text-sm font-medium text-green-100 bg-green-500 dark:text-green-700 dark:hover:bg-green-200 dark:hover:bg-green-100 hover:bg-green-400 focus:outline-none focus:shaodw-outline">
+                    {{ actions.secend }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

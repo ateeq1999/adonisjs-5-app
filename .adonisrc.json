@@ -4,7 +4,8 @@
     "./commands",
     "@adonisjs/core/build/commands",
     "@adonisjs/repl/build/commands",
-    "@adonisjs/lucid/build/commands"
+    "@adonisjs/lucid/build/commands",
+    "adonis-mix-asset/build/commands"
   ],
   "exceptionHandlerNamespace": "App/Exceptions/Handler",
   "aliases": {
@@ -31,7 +32,8 @@
     "@adonisjs/lucid",
     "@adonisjs/auth",
     "@adonisjs/shield",
-    "@adonisjs/redis"
+    "@adonisjs/redis",
+    "adonis-mix-asset"
   ],
   "metaFiles": [
     {
@@ -48,7 +50,7 @@
     }
   ],
   "directories": {
-    "public": "./tmp"
+    "public": "./public"
   },
   "aceProviders": [
     "@adonisjs/repl"

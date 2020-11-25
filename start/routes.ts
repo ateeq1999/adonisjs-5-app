@@ -1,5 +1,4 @@
 import Route from '@ioc:Adonis/Core/Route'
-import Redis from '@ioc:Adonis/Addons/Redis'
 
 Route.get('/register', 'AuthController.showRegister').middleware('guest')
 Route.post('/register', 'AuthController.register')
@@ -8,7 +7,8 @@ Route.get('/login', 'AuthController.showLogin').middleware('guest')
 Route.post('/login', 'AuthController.login')
 
 Route.on('/').render('home').middleware('auth')
-// Route.on('/').render('welcome')
+Route.on('/site').render('welcome')
+Route.on('/dashboard').render('dashboard')
 
 // Products Routes
 import './routes/product'

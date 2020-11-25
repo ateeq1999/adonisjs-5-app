@@ -1,29 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AdonisJS - A Modern Web Framework For Node.js</title>
-  <link href="https://fonts.googleapis.com/css?family=Poppins:400,500&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.1/socket.io.min.js" integrity="sha512-/WwtKR6NnHomLo0O4w9QKc1INTPEJs7ko6u2aBTA1paPldhPl8LtXsi7a35iEZ69+9P5dcgVNESG8hrP4Y2t3w==" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/vue@next"></script>
-</head>
-<body>
-  <div id="app">
-    <h1>Welcome page</h1>
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+@layout('layouts/master')
 
-  <script>
-    const socket = io('http://localhost:3333');
-    socket.on('news', (data) => {
-      console.log(data);
-      socket.emit('client_event', { my: 'clints Data' });
-    });
-    socket.on('product-created', (data) => {
-        console.log(data)
-        socket.emit('client_event', { event: 'product-created-event', data });
+@section('body')
+  <div class="p-10 dark:bg-gray-300 min-h-screen flex flex-wrap justify-center items-center from-gray-400 gap-8">
+    @component('components/card', {
+      dark: false,
+      title: 'Components Title',
+      description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint aspernatur cum a molestiae aliquid sed animi ducimus, nobis non vero?',
+      actions: { first: 'Try it Now', secend: 'No Thanks' },
     })
-  </script>
-</body>
-</html>
+    @endcomponent
+    @component('components/card', {
+      dark: true,
+      title: 'Components Title',
+      description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sint aspernatur cum a molestiae aliquid sed animi ducimus, nobis non vero?',
+      actions: { first: 'Try it Now', secend: 'No Thanks' }
+    })
+    @endcomponent
+  </div>
+@endsection
