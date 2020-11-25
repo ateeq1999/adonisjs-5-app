@@ -1,5 +1,49 @@
 @layout('layouts/master')
 
 @section('body')
-  
+    <div class="flex flex-row h-screen bg-gray-100">
+        <div class="flex flex-col justify-between items-center w-16 p-4 bg-gray-200 flex-none">
+            <div class="flex flex-col space-y-2">
+                <a href="#"><div class="rounded-full bg-gray-400 w-8 h-8"></div></a>
+                <a href="#"><div class="rounded-full bg-gray-400 w-8 h-8"></div></a>
+                <a href="#"><div class="rounded-full bg-gray-400 w-8 h-8"></div></a>
+                <a href="#"><div class="rounded-full bg-gray-400 w-8 h-8"></div></a>
+                <a href="#"><div class="rounded-full bg-gray-400 w-8 h-8"></div></a>
+                <a href="#"><div class="rounded-full bg-gray-400 w-8 h-8"></div></a>
+            </div>
+            <div class="flex flex-col space-y-2">
+                <a href="#"><div class="rounded-full bg-gray-400 w-8 h-8"></div></a>
+                <a href="#"><div class="rounded-full bg-gray-400 w-8 h-8"></div></a>
+                <a href="#"><div class="rounded-full bg-gray-400 w-8 h-8"></div></a>
+            </div>
+        </div>
+        <div class="w-64 bg-gray-100 p-4 flex flex-col space-y-4 flex-none">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="fonr=t-semibold text-2xl">Inbox</h1>
+                <div>
+                    <svg class="flex-none w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+            </div>
+            
+            <div class="bg-red-200 h-64"></div>
+            <div class="bg-red-200 h-64"></div>
+        </div>
+        <div class="flex flex-row flex-auto bg-white rounded-tl-xl border-l shadow-xl">
+            <div class="w-1/5 flex flex-col">
+                <div class="flex-none h-24"> Top</div>
+                <div class="flex-auto overflow-y-auto">
+                    <a href="#" class="block border-b">
+                        <div class="border-l-2 p-2 border-blue-500">
+                            <div class="bg-red-200"> Top</div>
+                            <div class="bg-green-200"> Bottom</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="w-3/5 border-l border-r border-gray-400">center</div>
+
+            <div class="w-1/5 bg-gray-200">right</div>
+        </div>
+    </div>
 @endsection
