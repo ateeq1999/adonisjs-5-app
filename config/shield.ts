@@ -95,6 +95,7 @@ export const csrf: ShieldConfig['csrf'] = {
   */
   exceptRoutes: [
     '/products/:id'
+    '/drivers/login'
   ],
 
   /*

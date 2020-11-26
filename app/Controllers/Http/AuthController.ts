@@ -59,4 +59,20 @@ export default class AuthController {
       return response.redirect('back')
     }
   }
+
+  public async driver_login ({ request, auth, session, response }: HttpContextContract) {
+    const { email, password } = request.all()
+
+    try {
+      const token = await auth.use('driver').attempt(email, password)
+
+      return response.send({ token })
+      // return response.redirect('/')
+    } catch (error) {
+      session.flash('notification', 'We couldn\'t verify your credentials.')
+
+      return response.send({ msg: 'unable to authenticate the driver' })
+      return response.redirect('back')
+    }
+  }
 }

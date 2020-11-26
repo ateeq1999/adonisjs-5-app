@@ -5,6 +5,7 @@ Route.post('/register', 'AuthController.register')
 Route.post('/logout', 'AuthController.logout')
 Route.get('/login', 'AuthController.showLogin').middleware('guest')
 Route.post('/login', 'AuthController.login')
+Route.post('/drivers/login', 'AuthController.driver_login').middleware('guest')
 
 Route.on('/').render('home').middleware('auth')
 Route.on('/site').render('welcome')

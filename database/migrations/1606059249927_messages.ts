@@ -8,6 +8,7 @@ export default class Messages extends BaseSchema {
       table.increments('id').primary()
       table.integer('user_id').unsigned().notNullable()
       table.integer('driver_id').unsigned().notNullable()
+      table.string('sender_type').nullable()
       table.string('text').notNullable()
       table.string('room_id').notNullable()
       table.timestamps(true)

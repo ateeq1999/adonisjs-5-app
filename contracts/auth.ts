@@ -6,6 +6,7 @@
  */
 
 import User from 'App/Models/User'
+import Driver from 'App/Models/Driver'
 
 declare module '@ioc:Adonis/Addons/Auth' {
   /*
@@ -36,6 +37,10 @@ declare module '@ioc:Adonis/Addons/Auth' {
     user: {
       implementation: LucidProviderContract<typeof User>,
       config: LucidProviderConfig<typeof User>,
+    },
+    driver: {
+      implementation: LucidProviderContract<typeof Driver>,
+      config: LucidProviderConfig<typeof Driver>,
     },
   }
 
@@ -81,6 +86,10 @@ declare module '@ioc:Adonis/Addons/Auth' {
     api: {
       implementation: OATGuardContract<'user', 'api'>,
       config: OATGuardConfig<'user'>,
+    },
+    driver: {
+      implementation: OATGuardContract<'driver', 'api'>,
+      config: OATGuardConfig<'driver'>,
     },
   }
 }
